@@ -1,0 +1,26 @@
+<div *ngIf="!edicionActiva">
+    <i class="fa {{itemInfo.extension | filtroExtension }}"></i>
+    <span> Nombre: {{itemInfo.nombre}} / Extensión: {{itemInfo.extension}} </span>
+    <!-- Establecemos un nuevo span que ocultará las herramientas si es una carpeta -->
+    <span *ngIf="itemInfo.tipo!='dir'">
+      <span class="item editar">
+        <i class="fa fa-pencil" aria-hidden="true" (click)="activarEdicion(itemInfo.nombre)"></i>
+      </span>
+      <span class="item borrar">
+          <i class="fa fa-trash" aria-hidden="true" (click)="borrar(itemInfo)"></i>
+      </span>
+    </span>
+    <!-- En su lugar vamos a mostrar otro tipo de herramientas -->
+    <span *ngIf="itemInfo.tipo == 'dir'">
+      <span class="item borrar">
+        <!-- Con este nuevo icono establecemos un evento que cargará el método nuevaRuta -->
+        <i class="fa fa-arrow-right" aria-hidden="true" (click)="nuevaRuta(itemInfo)"></i>
+      </span>
+    </span>
+</div>
+
+<div *ngIf="edicionActiva">
+  <input type="text" [(ngModel)]="modelItem.nuevoNombre">
+  <button (click)="renombrar(itemInfo)">Ok</button>
+  <button (click)="desactivarEdicion()">Cancelar</button>
+</div>

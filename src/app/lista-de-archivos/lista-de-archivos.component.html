@@ -1,0 +1,11 @@
+<!-- Vamos a cargar un botón que se mostrará solo si existe un nivel superior de carpeta: -->
+<button type="button" class="btn btn-danger" *ngIf="mostrarSuperior()" (click)="irASuperior()"><i class="fa fa-level-up"></i>Nivel Superior</button>
+
+<ul class="list-unstyled">
+
+  <li *ngFor = "let archivo of archivos" class="container">
+    <!-- Asignamos el nuevo evento para que se cargue cuando se active el mismo que ejecute el método refrescar: -->
+    <app-item-archivo [itemInfo]="archivo" (cambioArchivo)="refrescar()"></app-item-archivo>
+  </li>
+
+</ul>
